@@ -70,12 +70,12 @@
         section { padding: 100px 8%; }
         section h2 { font-size: 2.3rem; margin-bottom: 50px; border-left: 4px solid #fff; padding-left: 15px; }
 
-        /* 9:16 Portrait Video Container Layout */
-        .video-grid {
-            display: flex;
-            justify-content: center;
+        /* 3 Columns Grid for Services/Videos (9:16 Format) */
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 40px;
-            flex-wrap: wrap;
+            justify-content: center;
         }
 
         .video-card {
@@ -83,8 +83,6 @@
             border: 1px solid #1f1f1f; 
             border-radius: 16px; 
             overflow: hidden; 
-            width: 100%;
-            max-width: 340px; /* Perfect width for 9:16 mobile look */
             transition: 0.4s ease;
         }
         .video-card:hover { border-color: #444; transform: translateY(-8px); }
@@ -97,22 +95,28 @@
         }
         .video-container video {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;
+            cursor: pointer;
+        }
+
+        /* Audio / Play overlay hint */
+        .audio-hint {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            pointer-events: none;
+            border: 1px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(5px);
         }
 
         .video-info { padding: 25px; }
         .video-info h3 { font-size: 1.3rem; margin-bottom: 10px; }
         .video-info p { color: #888; font-size: 0.9rem; line-height: 1.6; }
-
-        /* What I Do Grid */
-        .grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;
-        }
-        .card { 
-            background: #0f0f0f; border: 1px solid #1f1f1f; border-radius: 16px; padding: 35px; transition: 0.4s ease; 
-        }
-        .card:hover { border-color: #444; transform: translateY(-5px); }
-        .card h3 { font-size: 1.4rem; margin-bottom: 15px; }
-        .card p { color: #888; font-size: 0.95rem; line-height: 1.6; }
 
         footer { text-align: center; padding: 50px; background: #030303; color: #555; border-top: 1px solid #111; }
 
@@ -140,41 +144,54 @@
     </header>
 
     <section id="work">
-        <h2 class="reveal">Featured Work & CGI Ads</h2>
-        <div class="video-grid">
+        <h2 class="reveal">Featured Work & Expertise</h2>
+        <div class="work-grid">
             
-            <!-- 9:16 Portrait CGI Video Project -->
+            <!-- Card 1: CGI Ads -->
             <div class="video-card reveal">
                 <div class="video-container">
-                    <video autoplay muted loop playsinline>
+                    <video controls playsinline poster="">
                         <source src="VID-20260825-WA0054.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
+                    <div class="audio-hint">🔊 Tap to Play / Sound</div>
                 </div>
                 <div class="video-info">
-                    <h3>CGI Product Ad</h3>
-                    <p>Hyper-realistic 3D product simulation built for vertical mobile screens and immersive brand storytelling.</p>
+                    <h3>CGI Ads</h3>
+                    <p>Hyper-realistic 3D product animations and immersive environments for modern brands.</p>
                 </div>
             </div>
 
-        </div>
-    </section>
+            <!-- Card 2: Video Editing -->
+            <div class="video-card reveal">
+                <div class="video-container">
+                    <video controls playsinline>
+                        <source src="your-editor-video.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="audio-hint">🔊 Tap to Play / Sound</div>
+                </div>
+                <div class="video-info">
+                    <h3>Video Editing</h3>
+                    <p>Rhythm-driven fast cuts, commercials, and high-retention social media reels.</p>
+                </div>
+            </div>
 
-    <section>
-        <h2 class="reveal">What I Do</h2>
-        <div class="grid">
-            <div class="card reveal">
-                <h3>CGI Ads</h3>
-                <p>Creating jaw-dropping 3D product animations and immersive environments.</p>
+            <!-- Card 3: Portfolio Maker -->
+            <div class="video-card reveal">
+                <div class="video-container">
+                    <video controls playsinline>
+                        <source src="your-portfolio-video.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="audio-hint">🔊 Tap to Play / Sound</div>
+                </div>
+                <div class="video-info">
+                    <h3>Portfolio Maker</h3>
+                    <p>Designing high-end, aesthetic, and conversion-focused web portfolios for creators.</p>
+                </div>
             </div>
-            <div class="card reveal">
-                <h3>Video Editing</h3>
-                <p>Rhythm-driven edits for commercials, brand films, and social media reels.</p>
-            </div>
-            <div class="card reveal">
-                <h3>Portfolio Maker</h3>
-                <p>Designing high-end, aesthetic web portfolios for creators and professionals.</p>
-            </div>
+
         </div>
     </section>
 
@@ -188,7 +205,7 @@
         <p>&copy; 2026 Ankit Kumar. All Rights Reserved.</p>
     </footer>
 
-    <!-- JavaScript for Text & Section Scroll Animations -->
+    <!-- JavaScript for Scroll Animations -->
     <script>
         window.addEventListener('scroll', revealOnScroll);
 
@@ -203,7 +220,6 @@
                 }
             }
         }
-        // Trigger once on load
         revealOnScroll();
     </script>
 </body>
