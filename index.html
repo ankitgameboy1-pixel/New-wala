@@ -8,13 +8,27 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            background-color: #0a0a0a;
+            background-color: #050505;
             color: #ededed;
             font-family: 'Plus Jakarta Sans', sans-serif;
             overflow-x: hidden;
         }
+
+        /* Aesthetic Animated Background Glow */
+        .bg-glow {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(29, 29, 29, 0.4) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(20, 20, 20, 0.5) 0%, transparent 40%);
+        }
+
         h1, h2, h3 { font-family: 'Syne', sans-serif; text-transform: uppercase; letter-spacing: 1px; }
+
         header {
             height: 100vh;
             display: flex;
@@ -23,89 +37,123 @@
             align-items: center;
             text-align: center;
             padding: 0 20px;
-            background: radial-gradient(circle at center, #1a1a1a 0%, #0a0a0a 100%);
+            position: relative;
         }
+
         header h1 {
             font-size: clamp(2.5rem, 6vw, 5rem);
             font-weight: 800;
             margin-bottom: 10px;
-            background: linear-gradient(90deg, #fff, #888);
+            background: linear-gradient(90deg, #fff, #666);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+
         header p { font-size: 1.2rem; color: #a1a1a1; margin-bottom: 30px; font-weight: 300; }
+
         .badge {
-            background: rgba(255, 255, 255, 0.08);
-            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 8px 18px;
             border-radius: 50px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             border: 1px solid rgba(255, 255, 255, 0.1);
             margin-bottom: 20px;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
         }
+
         .cta-btn {
-            padding: 12px 30px; background: #fff; color: #0a0a0a;
+            padding: 12px 30px; background: #fff; color: #050505;
             text-decoration: none; font-weight: 600; border-radius: 4px; transition: 0.3s ease;
         }
         .cta-btn:hover { background: #d4d4d4; transform: translateY(-2px); }
+
         section { padding: 100px 8%; }
-        section h2 { font-size: 2.5rem; margin-bottom: 50px; border-left: 4px solid #fff; padding-left: 15px; }
-        
+        section h2 { font-size: 2.3rem; margin-bottom: 50px; border-left: 4px solid #fff; padding-left: 15px; }
+
+        /* 9:16 Portrait Video Container Layout */
         .video-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            display: flex;
+            justify-content: center;
             gap: 40px;
+            flex-wrap: wrap;
         }
+
         .video-card {
-            background: #141414; border: 1px solid #222; border-radius: 12px; overflow: hidden; transition: 0.3s;
+            background: #0f0f0f; 
+            border: 1px solid #1f1f1f; 
+            border-radius: 16px; 
+            overflow: hidden; 
+            width: 100%;
+            max-width: 340px; /* Perfect width for 9:16 mobile look */
+            transition: 0.4s ease;
         }
-        .video-card:hover { border-color: #444; transform: translateY(-5px); }
+        .video-card:hover { border-color: #444; transform: translateY(-8px); }
+
         .video-container {
-            position: relative; width: 100%; padding-top: 56.25%; background: #000;
+            position: relative; 
+            width: 100%; 
+            padding-top: 177.77%; /* Exact 9:16 Aspect Ratio */
+            background: #000;
         }
         .video-container video {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;
         }
-        .video-info { padding: 25px; }
-        .video-info h3 { font-size: 1.4rem; margin-bottom: 10px; }
-        .video-info p { color: #888; font-size: 0.95rem; line-height: 1.6; }
 
+        .video-info { padding: 25px; }
+        .video-info h3 { font-size: 1.3rem; margin-bottom: 10px; }
+        .video-info p { color: #888; font-size: 0.9rem; line-height: 1.6; }
+
+        /* What I Do Grid */
         .grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;
         }
-        .card { background: #141414; border: 1px solid #222; border-radius: 12px; padding: 30px; transition: 0.3s; }
+        .card { 
+            background: #0f0f0f; border: 1px solid #1f1f1f; border-radius: 16px; padding: 35px; transition: 0.4s ease; 
+        }
         .card:hover { border-color: #444; transform: translateY(-5px); }
-        .card h3 { font-size: 1.5rem; margin-bottom: 15px; }
+        .card h3 { font-size: 1.4rem; margin-bottom: 15px; }
         .card p { color: #888; font-size: 0.95rem; line-height: 1.6; }
 
-        footer { text-align: center; padding: 50px; background: #050505; color: #666; border-top: 1px solid #1a1a1a; }
+        footer { text-align: center; padding: 50px; background: #030303; color: #555; border-top: 1px solid #111; }
+
+        /* Scroll Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
 
+    <div class="bg-glow"></div>
+
     <header>
-        <div class="badge">4+ YEARS EXPERIENCE</div>
-        <h1>Ankit Kumar</h1>
-        <p>CGI Artist &bull; Video Editor &bull; Portfolio Maker</p>
-        <a href="#work" class="cta-btn">View My Work</a>
+        <div class="badge reveal">4+ YEARS EXPERIENCE</div>
+        <h1 class="reveal">Ankit Kumar</h1>
+        <p class="reveal">CGI Artist &bull; Video Editor &bull; Portfolio Maker</p>
+        <a href="#work" class="cta-btn reveal">View My Work</a>
     </header>
 
     <section id="work">
-        <h2>Featured Work & CGI Ads</h2>
+        <h2 class="reveal">Featured Work & CGI Ads</h2>
         <div class="video-grid">
             
-            <!-- Video Project 1 -->
-            <div class="video-card">
+            <!-- 9:16 Portrait Video Project -->
+            <div class="video-card reveal">
                 <div class="video-container">
-                    <!-- Yahan apni video ka naam dalein -->
                     <video autoplay muted loop playsinline>
                         <source src="my-video.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </div>
                 <div class="video-info">
-                    <h3>Commercial Video Edit</h3>
-                    <p>Fast-paced, high-retention commercial cut with custom sound design and dynamic motion graphics.</p>
+                    <h3>Commercial Reel / CGI Ad</h3>
+                    <p>High-retention vertical cut built for modern mobile formats and social feeds.</p>
                 </div>
             </div>
 
@@ -113,17 +161,17 @@
     </section>
 
     <section>
-        <h2>What I Do</h2>
+        <h2 class="reveal">What I Do</h2>
         <div class="grid">
-            <div class="card">
+            <div class="card reveal">
                 <h3>CGI Ads</h3>
-                <p>Creating jaw-dropping 3D product animations and environments.</p>
+                <p>Creating jaw-dropping 3D product animations and immersive environments.</p>
             </div>
-            <div class="card">
+            <div class="card reveal">
                 <h3>Video Editing</h3>
-                <p>Rhythm-driven edits for commercials, brand films, and social media.</p>
+                <p>Rhythm-driven edits for commercials, brand films, and social media reels.</p>
             </div>
-            <div class="card">
+            <div class="card reveal">
                 <h3>Portfolio Maker</h3>
                 <p>Designing high-end, aesthetic web portfolios for creators and professionals.</p>
             </div>
@@ -131,14 +179,32 @@
     </section>
 
     <section id="contact" style="text-align: center;">
-        <h2>Let's Create Magic</h2>
-        <p style="color: #888; margin-bottom: 30px;">Have a project in mind? Let's talk about it.</p>
-        <a href="mailto:your-email@example.com" class="cta-btn">Get In Touch</a>
+        <h2 class="reveal">Let's Create Magic</h2>
+        <p class="reveal" style="color: #888; margin-bottom: 30px;">Have a project in mind? Let's talk about it.</p>
+        <a href="mailto:your-email@example.com" class="cta-btn reveal">Get In Touch</a>
     </section>
 
-    <footer>
+    <footer class="reveal">
         <p>&copy; 2026 Ankit Kumar. All Rights Reserved.</p>
     </footer>
 
+    <!-- JavaScript for Text & Section Scroll Animations -->
+    <script>
+        window.addEventListener('scroll', revealOnScroll);
+
+        function revealOnScroll() {
+            let reveals = document.querySelectorAll('.reveal');
+            for (let i = 0; i < reveals.length; i++) {
+                let windowHeight = window.innerHeight;
+                let elementTop = reveals[i].getBoundingClientRect().top;
+                let elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add('active');
+                }
+            }
+        }
+        // Trigger once on load
+        revealOnScroll();
+    </script>
 </body>
 </html>
