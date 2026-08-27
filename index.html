@@ -40,6 +40,17 @@
             position: relative;
         }
 
+        /* Logo Styling */
+        .logo-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 25px;
+            box-shadow: 0 0 20px rgba(255,255,255,0.1);
+        }
+
         header h1 {
             font-size: clamp(2.5rem, 6vw, 5rem);
             font-weight: 800;
@@ -64,6 +75,7 @@
         .cta-btn {
             padding: 12px 30px; background: #fff; color: #050505;
             text-decoration: none; font-weight: 600; border-radius: 4px; transition: 0.3s ease;
+            display: inline-block; cursor: pointer; border: none;
         }
         .cta-btn:hover { background: #d4d4d4; transform: translateY(-2px); }
 
@@ -98,7 +110,6 @@
             cursor: pointer;
         }
 
-        /* Audio / Play overlay hint */
         .audio-hint {
             position: absolute;
             bottom: 15px;
@@ -118,6 +129,67 @@
         .video-info h3 { font-size: 1.3rem; margin-bottom: 10px; }
         .video-info p { color: #888; font-size: 0.9rem; line-height: 1.6; }
 
+        /* Contact Form Styles */
+        .contact-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #0f0f0f;
+            border: 1px solid #1f1f1f;
+            padding: 40px;
+            border-radius: 16px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-bottom: 8px;
+            font-family: 'Syne', sans-serif;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background: #161616;
+            border: 1px solid #282828;
+            border-radius: 8px;
+            color: #fff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1rem;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #fff;
+        }
+        .whatsapp-btn {
+            width: 100%;
+            background: #25D366;
+            color: #fff;
+            font-size: 1.05rem;
+            font-weight: 700;
+            padding: 14px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+            font-family: 'Syne', sans-serif;
+            letter-spacing: 1px;
+        }
+        .whatsapp-btn:hover {
+            background: #20ba5a;
+            transform: translateY(-2px);
+        }
+
+        .phone-display {
+            margin-top: 15px;
+            color: #777;
+            font-size: 0.9rem;
+        }
+        .phone-display span { color: #fff; font-weight: 600; }
+
         footer { text-align: center; padding: 50px; background: #030303; color: #555; border-top: 1px solid #111; }
 
         /* Scroll Animation Classes */
@@ -136,13 +208,18 @@
 
     <div class="bg-glow"></div>
 
+    <!-- Header / Hero Section -->
     <header>
+        <!-- Logo Added Here -->
+        <img src="70f29193f9975c13a207c95d2f58d536.jpg" alt="Ankit Kumar Logo" class="logo-img reveal">
+        
         <div class="badge reveal">4+ YEARS EXPERIENCE</div>
         <h1 class="reveal">Ankit Kumar</h1>
         <p class="reveal">CGI Artist &bull; Video Editor &bull; Portfolio Maker</p>
         <a href="#work" class="cta-btn reveal">View My Work</a>
     </header>
 
+    <!-- Work Showcase Section (9:16 Videos with Sound) -->
     <section id="work">
         <h2 class="reveal">Featured Work & Expertise</h2>
         <div class="work-grid">
@@ -162,7 +239,7 @@
                 </div>
             </div>
 
-            <!-- Card 2: Video Editing (my-video.mp4 added back) -->
+            <!-- Card 2: Video Editing -->
             <div class="video-card reveal">
                 <div class="video-container">
                     <video controls playsinline>
@@ -195,20 +272,46 @@
         </div>
     </section>
 
-    <section id="contact" style="text-align: center;">
-        <h2 class="reveal">Let's Create Magic</h2>
-        <p class="reveal" style="color: #888; margin-bottom: 30px;">Have a project in mind? Let's talk about it.</p>
-        <a href="mailto:your-email@example.com" class="cta-btn reveal">Get In Touch</a>
+    <!-- Contact & WhatsApp Integration Section -->
+    <section id="contact">
+        <h2 class="reveal" style="text-align: center;">Let's Build Something Great</h2>
+        <div class="contact-container reveal">
+            <div class="form-group">
+                <label>Your Name</label>
+                <input type="text" id="clientName" placeholder="Enter your name">
+            </div>
+            <div class="form-group">
+                <label>What do you want to get done?</label>
+                <select id="projectType">
+                    <option value="CGI Ad">CGI Ad Creation</option>
+                    <option value="Video Editing">Video Editing / Reels</option>
+                    <option value="Portfolio Website">Portfolio Website Maker</option>
+                    <option value="Other Project">Other Creative Project</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Your Budget (₹ / USD)</label>
+                <input type="text" id="clientBudget" placeholder="e.g., ₹15,000 or $200">
+            </div>
+            <div class="form-group">
+                <label>Project Details / Message</label>
+                <textarea id="clientMsg" rows="4" placeholder="Briefly describe your requirements..."></textarea>
+            </div>
+            <button class="whatsapp-btn" onclick="sendToWhatsApp()">🚀 Send Inquiry via WhatsApp</button>
+            <div class="phone-display" style="text-align: center;">
+                Direct Call / WhatsApp: <span>+91 7889110982</span>
+            </div>
+        </div>
     </section>
 
     <footer class="reveal">
         <p>&copy; 2026 Ankit Kumar. All Rights Reserved.</p>
     </footer>
 
-    <!-- JavaScript for Scroll Animations -->
+    <!-- JavaScript for Scroll Animation and WhatsApp Integration -->
     <script>
+        // Scroll Reveal Animation
         window.addEventListener('scroll', revealOnScroll);
-
         function revealOnScroll() {
             let reveals = document.querySelectorAll('.reveal');
             for (let i = 0; i < reveals.length; i++) {
@@ -221,6 +324,32 @@
             }
         }
         revealOnScroll();
+
+        // Direct WhatsApp Form Function
+        function sendToWhatsApp() {
+            let name = document.getElementById('clientName').value.trim();
+            let project = document.getElementById('projectType').value;
+            let budget = document.getElementById('clientBudget').value.trim();
+            let msg = document.getElementById('clientMsg').value.trim();
+
+            if(name === "") {
+                alert("Please enter your name!");
+                document.getElementById('clientName').focus();
+                return;
+            }
+
+            let phoneNumber = "917889110982"; // Your WhatsApp Number
+            
+            let text = `Hi Ankit, my name is *${name}*.\n\n` +
+                       `*I want:* ${project}\n` +
+                       `*My Budget:* ${budget ? budget : 'Not specified'}\n` +
+                       `*Details:* ${msg ? msg : 'No additional details'}`;
+
+            let encodedText = encodeURIComponent(text);
+            let whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedText}`;
+
+            window.open(whatsappURL, '_blank');
+        }
     </script>
 </body>
 </html>
